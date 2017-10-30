@@ -1,0 +1,66 @@
+body {
+    background-color:#F4F4F7;
+}
+.view {
+    margin-top: 30px;
+}
+.navHeading {
+    font-family: 'Pacifico',cursive;
+    margin: 2px;
+    color: white;
+}
+.navOption {
+    color: black;
+    opacity: 0.6;
+    font-size: 20px;
+    text-decoration: none;
+}
+.navOption:hover {
+    padding: 10px;
+    color: white;
+    background-color: #3F51B5;
+}
+.inserting {
+    margin: 10px;
+    padding: 20px;
+}
+
+.alliedNav {
+    position: fixed;
+    width: 100%;
+    background-color: red;
+    color: white;
+    letter-spacing: 3px;
+    box-shadow: 0px 0px 2px 2px black;
+}
+.nav-heading {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 4px;
+    font-weight: 700;
+    /*text-shadow: 2px 2px black;*/
+    margin-bottom: 20px;
+}
+.mat-menu {
+    margin:20px;
+    font-size: 40px;
+    color: white;
+    vertical-align: middle;
+    float: left;
+}
+.navOption {
+    text-transform: capitalize;
+    font-weight: 500;
+    text-align: center;
+    font-family: 'Roboto',sans-serif;
+}
+
+#nav-menu-button {
+    cursor: pointer;
+}
+@media only screen and (max-width: 400px) {
+    .nav-heading {
+        font-size: 20px;
+        margin: 0px;
+    }
+}
