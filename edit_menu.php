@@ -78,6 +78,7 @@ if (isset($_POST['staffName'])){
             <!--Main body where orders or modifiers are displayed-->
             <div class="col-md-8">
                 <!-- insert -->
+                <!--TODO: add orders and complete orders-->
                 <div class="dbHandler inserting">
                     <form class="form-horizontal" method="post" enctype=multipart/form-data>
                         <legend>Insert</legend>
@@ -130,10 +131,12 @@ if (isset($_POST['staffName'])){
                             $tbody .= "</tr>";
                         }
                         echo $tbody;
+                        //TODO: add excel like ability to modify cells for menu items
                         ?>
                         </tbody>
                     </table>
                 </div>
+
                 <!--END of modifying segment-->
                 <!--Staff Insert-->
                 <div class="dbHandler staffInsert" style="display: none">
@@ -179,6 +182,7 @@ if (isset($_POST['staffName'])){
                             $tbody .= "<td><button type=\"button\" class=\"btn btn-danger\" id=\"del\"><i class=\"material-icons\">delete</i></button></td>";
                             $tbody .= "</tr>";
                         }
+                        //TODO: add excel like ability to modify staff details
                         echo $tbody;
                         ?>
                         </tbody>
