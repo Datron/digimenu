@@ -21,8 +21,7 @@ body {
     background-color: #3F51B5;
 }
 .inserting {
-    margin: 10px;
-    padding: 20px;
+    /*padding: 20px;*/
 }
 
 .alliedNav {
@@ -30,16 +29,27 @@ body {
     width: 100%;
     background-color: red;
     color: white;
+    height: 50px;
+    z-index: 3;
     letter-spacing: 3px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
     box-shadow: 0px 0px 2px 2px black;
+}
+.food-pic {
+    width: 100px;
+    height: 100px;
+    display: none;
 }
 .nav-heading {
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     font-weight: 700;
     /*text-shadow: 2px 2px black;*/
-    margin-bottom: 20px;
+    font-size: 30px;
+    margin-top: 7px;
 }
 .mat-menu {
     margin:20px;
@@ -51,12 +61,49 @@ body {
 .navOption {
     text-transform: capitalize;
     font-weight: 500;
+    color: white;
     text-align: center;
     font-family: 'Roboto',sans-serif;
 }
-
+.btn-danger {
+    padding: 5px;
+}
 #nav-menu-button {
+    margin-top: -15px;
     cursor: pointer;
+}
+.navMenu {
+    background-size: contain;
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 99; /* Stay on top */
+    top: 0;
+    left: 0;
+    text-align: center;
+    border: 0px 2px 0px 0px white;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+.navMenu a {
+    top: 30px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+.navMenu a:hover {
+    color: white;
+}
+.navMenu .nav-close {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 60px;
+    margin-left: 50px;
 }
 @media only screen and (max-width: 400px) {
     .nav-heading {

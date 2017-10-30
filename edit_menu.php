@@ -11,6 +11,11 @@ if (isset($_POST['dishName'])){
         echo $mysqli->error;
     move_uploaded_file($_FILES["foodimg"]["tmp_name"], $target_file1);
 }
+if (isset($_POST['staffName'])){
+    $sql = "INSERT INTO staff(staff_name, role, phone) VALUES('{$_POST['staffName']}','{$_POST['staffRole']}','{$_POST['staffPhone']}')";
+    if (!($mysqli->query($sql)))
+        echo $mysqli->error;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,42 +41,44 @@ if (isset($_POST['dishName'])){
     <script src="js/edits.js"></script>
 </head>
 <body>
-    <!------------------------------ START OF PAGE ----------------------------------------->
-    <div id="main">
-        <nav class="navbar alliedNav">
-            <div class="container-fluid">
-                <div class="row">
-                    <a href="#"class="col-md-2 col-sm-1" id="nav-menu-button"><i class="material-icons mat-menu">menu</i></a>
-                    <h1 class="col-md-8 col-sm-10 nav-heading">Burgers and Dosa</h1>
-                </div>
+<!------------------------------ NAVIGATION MENU -------------------------------------->
+<div id="nav-menu" class="navMenu">
+    <h1 class="nav-heading">Burgers and Dosas</h1>
+    <a href="#" class="nav-close" id="navClose"><i class="material-icons">close</i></a>
+    <h1 class="nav-heading">Orders</h1>
+    <a href="#orders" class=""><h3 class="navOption">Current Orders</h3></a>
+    <a href="#completed" class=""><h3 class="navOption">Completed</h3></a>
+    <h1 class="nav-heading">Menu</h1>
+    <a href="#menu_insert" class=""><h3 class="navOption">Insert</h3></a>
+    <a href="#menu_modify" class=""><h3 class="navOption">Modify</h3></a>
+    <h1 class="nav-heading">Staff</h1>
+    <a href="#staff_insert" class=""><h3 class="navOption">Insert</h3></a>
+    <a href="#staff_modify" class=""><h3 class="navOption">Modify</h3></a>
+
+</div>
+<!------------------------------ START OF PAGE ----------------------------------------->
+<div id="main">
+    <nav class="navbar alliedNav">
+        <div class="container-fluid">
+            <div class="row">
+                <a href="#"class="col-md-2 col-sm-1" id="nav-menu-button"><i class="material-icons mat-menu">menu</i></a>
+                <h1 class="col-md-8 col-sm-10 nav-heading">Admin Page</h1>
             </div>
-        </nav>
-        <!--------------------------------END OF NAVBAR ---------------------------------------->
-    </div>
+        </div>
+    </nav>
+    <!--------------------------------END OF NAVBAR ---------------------------------------->
+</div>
     <br>
     <br>
     <div class="container-fluid view">
         <!--main row-->
         <div class="row">
             <!--menu column defined here-->
-            <div class="col-md-3">
-                <!--<ul>
-                    <li><button id="insert" class="btn item"><h3 class="menu-options">Insert</h3></button></li>
-                    <li><button id="update" class="btn item"><h3 class="menu-options">Update</h3></button></li>
-                    <li><button id="modify" class="btn item"><h3 class="menu-options">Modify</h3></button></li>
-                </ul>-->
-                <h1 class="nav-heading">Orders</h1>
-                <a href="#" class=""><h3 class="navOption">Current Orders</h3></a href="">
-                <a href="#" class=""><h3 class="navOption">Completed</h3></a>
-                <h1 class="nav-heading">Menu</h1>
-                <a href="#" class=""><h3 class="navOption">Insert</h3></a>
-                <a href="#" class=""><h3 class="navOption">Modify</h3></a>
-                <a href="#" class=""><h3 class="navOption">Delete</h3></a>
-
-            </div>
+            <div class="col-md-3"></div>
             <!--Main body where orders or modifiers are displayed-->
             <div class="col-md-8">
-                <div class="inserting">
+                <!-- insert -->
+                <div class="dbHandler inserting">
                     <form class="form-horizontal" method="post" enctype=multipart/form-data>
                         <legend>Insert</legend>
                         <div class="form-group">
@@ -94,7 +101,89 @@ if (isset($_POST['dishName'])){
                         <button type="submit" class="btn btn-primary submit">Submit</button>
                     </form>
                 </div>
-
+                <!-- modify and delete -->
+                <div class="dbHandler modifying" style="display: none">
+                    <legend>Modify</legend>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $getItems = "SELECT * FROM menu";
+                        $result1 = $mysqli->query($getItems);
+                        $tbody = "";
+                        while ($row = $result1->fetch_assoc()){
+                            $tbody .= "<tr value='{$row['item_id']}'>";
+                            $tbody .= "<td>".$row['Name']."</td>";
+                            $tbody .= "<td>".$row['description']."</td>";
+                            $tbody .= "<td>".$row['category']."</td>";
+                            $tbody .= "<td><input type=\"file\" class=\"filesup\" style=\"display:none\" name=\"foodimg\">
+                            <button type=\"button\" class=\"btn btn-success\" id=\"upload\">Upload New Image</button></td>";
+                            $tbody .= "<td><button type=\"button\" class=\"btn btn-danger\" id=\"dele\"><i class=\"material-icons\">delete</i></button></td>";
+                            $tbody .= "</tr>";
+                        }
+                        echo $tbody;
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!--END of modifying segment-->
+                <!--Staff Insert-->
+                <div class="dbHandler staffInsert" style="display: none">
+                    <form class="form-horizontal" method="post" enctype=multipart/form-data>
+                        <legend>Insert</legend>
+                        <div class="form-group">
+                            <label for="name">Staff Name</label>
+                            <input class="form-control col-md-5" id="staff-name" placeholder="name" name="staffName" required>
+                            <br>
+                            <label for="description">Role</label>
+                            <input class="form-control col-md-5" id="staff-role" placeholder="name" name="staffRole" required>
+                            <br>
+                            <label for="category">Phone</label>
+                            <input class="form-control col-md-5" id="staff-phone" placeholder="phone number" name="staffPhone" type="tel" required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary submit">Submit</button>
+                    </form>
+                </div>
+                <!--End of staff insert-->
+                <!--Staff Modify-->
+                <div class="dbHandler staffModify" style="display: none">
+                    <legend>Modify</legend>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $getItems = "SELECT * FROM staff";
+                        $result1 = $mysqli->query($getItems);
+                        $tbody = "";
+                        while ($row = $result1->fetch_assoc()){
+                            $tbody .= "<tr value='{$row['staff_id']}'>";
+                            $tbody .= "<td>".$row['staff_name']."</td>";
+                            $tbody .= "<td>".$row['role']."</td>";
+                            $tbody .= "<td>".$row['phone']."</td>";
+                            $tbody .= "<td><button type=\"button\" class=\"btn btn-danger\" id=\"del\"><i class=\"material-icons\">delete</i></button></td>";
+                            $tbody .= "</tr>";
+                        }
+                        echo $tbody;
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
