@@ -4,9 +4,10 @@ if (isset($_POST['dishName'])){
     $name = $_POST['dishName'];
     $des = $_POST['dishDes'];
     $cat = $_POST['category'];
+    $cost = $_POST['dishCost'];
     $target_dir = "images/";
     $target_file1 = $target_dir . basename($_FILES["foodimg"]["name"]);
-    $sql = "INSERT INTO menu(name,description,category,img_src) VALUES('$name','$des','$cat','$target_file1')";
+    $sql = "INSERT INTO menu(name,description,category,img_src,cost) VALUES('$name','$des','$cat','$target_file1',$cost)";
     if (!$mysqli->query($sql))
         echo $mysqli->error;
     move_uploaded_file($_FILES["foodimg"]["tmp_name"], $target_file1);
@@ -43,7 +44,7 @@ if (isset($_POST['staffName'])){
 <body>
 <!------------------------------ NAVIGATION MENU -------------------------------------->
 <div id="nav-menu" class="navMenu">
-    <h1 class="nav-heading">Burgers and Dosas</h1>
+<!--    <h1 class="nav-heading">Burgers and Dosas</h1>-->
     <a href="#" class="nav-close" id="navClose"><i class="material-icons">close</i></a>
     <h1 class="nav-heading">Orders</h1>
     <a href="#orders" class=""><h3 class="navOption">Current Orders</h3></a>
@@ -91,6 +92,8 @@ if (isset($_POST['staffName'])){
                             <br>
                             <label for="category">Category</label>
                             <input class="form-control col-md-5" id="category" placeholder="category" name="category">
+                            <br><label for="category">Cost</label>
+                            <input class="form-control col-md-5" id="cost" placeholder="price" name="dishCost">
                         </div>
                         <br>
                         <div class="form-group">
@@ -125,8 +128,8 @@ if (isset($_POST['staffName'])){
                             $tbody .= "<td>".$row['Name']."</td>";
                             $tbody .= "<td>".$row['description']."</td>";
                             $tbody .= "<td>".$row['category']."</td>";
-                            $tbody .= "<td><input type=\"file\" class=\"filesup\" style=\"display:none\" name=\"foodimg\">
-                            <button type=\"button\" class=\"btn btn-success\" id=\"upload\">Upload New Image</button></td>";
+                            $tbody .= "<td><input type=\"file\" class=\"filesup1\" style=\"display:none\" name=\"foodimg\">
+                            <button type=\"button\" class=\"btn btn-success\" id=\"upload1\">Upload New Image</button></td>";
                             $tbody .= "<td><button type=\"button\" class=\"btn btn-danger\" id=\"dele\"><i class=\"material-icons\">delete</i></button></td>";
                             $tbody .= "</tr>";
                         }

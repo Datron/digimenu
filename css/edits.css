@@ -75,11 +75,12 @@ body {
 .navMenu {
     background-size: contain;
     height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
+    width: 20%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 99; /* Stay on top */
+    z-index: 2; /* Stay on top */
     top: 0;
     left: 0;
+    color: white;
     text-align: center;
     border: 0px 2px 0px 0px white;
     background-color: #111; /* Black*/
@@ -100,8 +101,8 @@ body {
 }
 .navMenu .nav-close {
     position: absolute;
-    top: 0;
-    right: 25px;
+    top: 20px;
+    right: 10px;
     font-size: 60px;
     margin-left: 50px;
 }

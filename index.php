@@ -14,9 +14,9 @@
     if (isset($_POST['table']) || isset($_POST['customer_name']))
     {
         $no =(int) $_POST['table'];
-        $sql = "UPDATE tables SET name='{$_POST['customer_name']}' WHERE table_no = $no";
+        $sql = "UPDATE tables SET name='{$_POST['customer_name']}' WHERE table_no = $no AND table_code='{$_POST['table_code']}'";
         if ($mysqli->query($sql))
-            header("location:/dbms/menu.php");
+            header("location:/dbms/home.php");
         else
             echo $mysqli->error;
     }
@@ -67,11 +67,7 @@
             margin-left: -60px;
             text-align: center;
         }
-        @media only screen and (max-width: 400px){
-            .main {
-                top: 10%;
-                height: 75%;
-            }
+        @media only screen and (max-width: 600px){
             .col-md-5 {
                 margin-left: 0px;
             }
@@ -104,9 +100,11 @@
                         </select>
                         <br>
                         <input type="text" id="input" name="customer_name" class="form-control names" placeholder="Your name" required="required">
+                        <br>
+                        <input type="text" id="code" name="table_code" class="form-control names" placeholder="table code" required="required">
                         <div class="btn-group">
                             <button type="submit" class="btn btn-danger book">Book</button>
-                            <a href="menu.php"><button type="button" class="btn btn-danger book">View Menu</button></a>
+                            <a href="home.php"><button type="button" class="btn btn-danger book">View Menu</button></a>
                         </div>
                     </form>
                 </div>

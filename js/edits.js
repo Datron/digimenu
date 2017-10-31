@@ -4,7 +4,7 @@ $(document).ready(function () {
    console.log("height "+height);
    $('.col-md-3').attr("height",height.toString());
    //trigger file upload
-    $('#upload').click(function () {
+    $('.form-group #upload').click(function () {
         $('.filesup').click();
     });
     $('.navMenu a').click(function () {
