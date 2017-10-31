@@ -19,7 +19,7 @@ class menu
         $result = $mysqli->query($query);
         $html = '';
         while ($row = $result->fetch_assoc()){
-            
+
         }
     }
     public function loadBurgers(){
