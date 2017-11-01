@@ -1,5 +1,6 @@
 <?php
     include 'dbconfig.php';
+    session_start();
     $sql = "SELECT table_no FROM tables WHERE name IS NULL";
     $result = $mysqli->query($sql);
     $dropdown_content = "";
@@ -14,11 +15,14 @@
     if (isset($_POST['table']) || isset($_POST['customer_name']))
     {
         $no =(int) $_POST['table'];
+        $_SESSION['tableno'] = $no;
+        $_SESSION['cust_name'] = $_POST['customer_name'];
         $sql = "UPDATE tables SET name='{$_POST['customer_name']}' WHERE table_no = $no AND table_code='{$_POST['table_code']}'";
         if ($mysqli->query($sql))
             header("location:/dbms/home.php");
         else
             echo $mysqli->error;
+        session_commit();
     }
 ?>
 <!DOCTYPE html>

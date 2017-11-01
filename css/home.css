@@ -1,0 +1,102 @@
+body {
+    background: #F4F4F7;
+}
+.alliedNav {
+    position: fixed;
+    width: 100%;
+    background-color: #F44336;
+    color: white;
+    text-align: center;
+    height: 80px;
+    z-index: 3;
+    letter-spacing: 3px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    box-shadow: 0px 0px 2px 2px black;
+}
+th :focus {
+    border-bottom: 3px solid white!important;
+    border-radius: 0px;
+}
+.table-nav {
+    border-color: transparent!important;
+    text-align: center;
+}
+.btn-menu {
+    font-size: 15px;
+    font-family: 'Roboto';
+    font-weight: 700;
+    background: #F44336;
+    color: white;
+}
+.btn-menu :hover {
+    color: white;
+}
+.table th, .table td {
+    border: none !important;
+}
+.table th {
+    /*border-right: 1px solid white !important;*/
+}
+.postButton {
+    text-align: right;
+}
+.btn-post-material {
+    margin: 10px;
+    position: fixed;
+    bottom: 10px;
+    width: 50px;
+    height: 50px;
+    right:0px;
+    background-color: #f44336;
+    border: 0px;
+    border-radius: 50%;
+    color: white;
+    box-shadow: 2px 5px #616161;
+
+}
+#search-div {
+    padding: 2px 5px 0px 5px;
+}
+.input-group-addon {
+    background: #C62828;
+    border:transparent;
+}
+.input-group-addon .material-icons {
+    font-size: 17px;
+    background: #C62828;
+    color: white;
+}
+#search {
+    background: #C62828;
+    border-color: #C62828;
+}
+.btn-post-material:hover {
+    color: white;
+    background-color: red;
+    transition: 0.4s;
+}
+.btn-post-material:focus {
+    color: white;
+}
+.cardView {
+    position: relative;
+    top:90px;
+    margin: 3px;
+    padding-bottom:50px;
+}
+/*Card layout css*/
+.card {
+    margin:6px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px #9E9E9E;
+    background: white;
+}
+.card .btn-group {
+    margin-top:20px;
+    text-align: right;
+}
+.btn-quantity {
+    background: transparent;
+}

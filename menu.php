@@ -6,7 +6,6 @@
  * Time: 9:19 PM
  * @property  mysqli
  */
-//TODO: add menu functionality
 class menu
 {
     private $mysqli;
@@ -19,17 +18,71 @@ class menu
         $result = $mysqli->query($query);
         $html = '';
         while ($row = $result->fetch_assoc()){
-
+            $type = explode(' ',$row['category']);
+            if ($type[0] == "Veg")
+                $sym = "images/indian-vegetarian-mark-90.png";
+            else
+                $sym = "images/non-veg-symbol.png";
+            $html .= <<<EOT
+            <div class="col-md-6 col-xs-12 card">
+                <div class="row">
+                <img src="{$row['img_src']}" class="img-responsive menu-img"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-9">
+                        <h2 class="itemHeading">{$row['Name']} <img src="{$sym}" style="width: 20px;height: 20px"/></h2>
+                        <p class="itemDes">{$row['description']}</p>
+                        <h4 class="pricing">{$row['cost']}&#x20b9;</h4><br>
+                        </div>
+                        <div class="col-md-6 col-xs-3">
+                        <div class="btn-group" value="{$row['item_id']}">
+                        <button class="btn btn-quantity"><i class="material-icons">remove_circle_outline</i></button>
+                        <button class="btn btn-quantity"><span id="quantity">&nbsp; 0</span></button>
+                        <button class="btn btn-quantity"><i class="material-icons">add_circle_outline</i></button>
+                        
+                        </div>                
+                    </div>
+                </div>
+            </div>
+EOT;
         }
+        echo $html;
     }
     public function loadBurgers(){
         global $mysqli;
-        $query = "SELECT * FROM menu WHERE category LIKE '%Burgers'";
+        $query = "SELECT * FROM menu WHERE category LIKE '%Burger'";
         $result = $mysqli->query($query);
         $html = '';
         while ($row = $result->fetch_assoc()){
-
+            $type = explode(' ',$row['category']);
+            if ($type[0] == "Veg")
+                $sym = "images/indian-vegetarian-mark-90.png";
+            else
+                $sym = "images/non-veg-symbol.png";
+            $html .= <<<EOT
+            <div class="col-md-6 col-xs-12 card">
+                <div class="row">
+                <img src="{$row['img_src']}" class="img-responsive menu-img"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-9">
+                        <h2 class="itemHeading">{$row['Name']} <img src="{$sym}" style="width: 20px;height: 20px"/></h2>
+                        <p class="itemDes">{$row['description']}</p>
+                        <h4 class="pricing">{$row['cost']}&#x20b9;</h4><br>
+                        </div>
+                        <div class="col-md-6 col-xs-3">
+                        <div class="btn-group" value="{$row['item_id']}">
+                        <button class="btn btn-quantity"><i class="material-icons">remove_circle_outline</i></button>
+                        <button class="btn btn-quantity"><span id="quantity">&nbsp; 0</span></button>
+                        <button class="btn btn-quantity"><i class="material-icons">add_circle_outline</i></button>
+                        
+                        </div>                
+                    </div>
+                </div>
+            </div>
+EOT;
         }
+        echo $html;
     }
     public function loadDosa(){
         global $mysqli;
@@ -37,37 +90,106 @@ class menu
         $result = $mysqli->query($query);
         $html = '';
         while ($row = $result->fetch_assoc()){
-
+            $type = explode(' ',$row['category']);
+            if ($type[0] == "Veg")
+                $sym = "images/indian-vegetarian-mark-90.png";
+            else
+                $sym = "images/non-veg-symbol.png";
+            $html .= <<<EOT
+            <div class="col-md-6 col-xs-12 card">
+                <div class="row">
+                <img src="{$row['img_src']}" class="img-responsive menu-img"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-9">
+                        <h2 class="itemHeading">{$row['Name']} <img src="{$sym}" style="width: 20px;height: 20px"/></h2>
+                        <p class="itemDes">{$row['description']}</p>
+                        <h4 class="pricing">{$row['cost']}&#x20b9;</h4><br>
+                        </div>
+                        <div class="col-md-6 col-xs-3">
+                        <div class="btn-group" value="{$row['item_id']}">
+                        <button class="btn btn-quantity"><i class="material-icons">remove_circle_outline</i></button>
+                        <button class="btn btn-quantity"><span id="quantity">&nbsp; 0</span></button>
+                        <button class="btn btn-quantity"><i class="material-icons">add_circle_outline</i></button>
+                        
+                        </div>                
+                    </div>
+                </div>
+            </div>
+EOT;
         }
+        echo $html;
     }
-    public function loadBeverages(){
+    public function loadSides(){
+        global $mysqli;
+        $query = "SELECT * FROM menu WHERE category='Sides'";
+        $result = $mysqli->query($query);
+        $html = '';
+        while ($row = $result->fetch_assoc()){
+            $type = explode(' ',$row['category']);
+            if ($type[0] == "Veg")
+                $sym = "images/indian-vegetarian-mark-90.png";
+            else
+                $sym = "images/non-veg-symbol.png";
+            $html .= <<<EOT
+            <div class="col-md-6 col-xs-12 card">
+                <div class="row">
+                <img src="{$row['img_src']}" class="img-responsive menu-img"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-9">
+                        <h2 class="itemHeading">{$row['Name']} <img src="{$sym}" style="width: 20px;height: 20px"/></h2>
+                        <p class="itemDes">{$row['description']}</p>
+                        <h4 class="pricing">{$row['cost']}&#x20b9;</h4><br>
+                        </div>
+                        <div class="col-md-6 col-xs-3">
+                        <div class="btn-group" value="{$row['item_id']}">
+                        <button class="btn btn-quantity"><i class="material-icons">remove_circle_outline</i></button>
+                        <button class="btn btn-quantity"><span id="quantity">&nbsp; 0</span></button>
+                        <button class="btn btn-quantity"><i class="material-icons">add_circle_outline</i></button>
+                        
+                        </div>                
+                    </div>
+                </div>
+            </div>
+EOT;
+        }
+        echo $html;
+    }
+    public function loadBeverages()
+    {
         global $mysqli;
         $query = "SELECT * FROM menu WHERE category='Beverage'";
         $result = $mysqli->query($query);
         $html = '';
-        while ($row = $result->fetch_assoc()){
-
+        while ($row = $result->fetch_assoc()) {
+            $type = explode(' ', $row['category']);
+            if ($type[0] == "Veg")
+                $sym = "images/indian-vegetarian-mark-90.png";
+            else
+                $sym = "images/non-veg-symbol.png";
+            $html .= <<<EOT
+            <div class="col-md-6 col-xs-12 card">
+                <div class="row">
+                <img src="{$row['img_src']}" class="img-responsive menu-img"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-9">
+                        <h2 class="itemHeading">{$row['Name']} <img src="{$sym}" style="width: 20px;height: 20px"/></h2>
+                        <p class="itemDes">{$row['description']}</p>
+                        <h4 class="pricing">{$row['cost']}&#x20b9;</h4><br>
+                        </div>
+                        <div class="col-md-6 col-xs-3">
+                        <div class="btn-group" value="{$row['item_id']}">
+                        <button class="btn btn-quantity"><i class="material-icons">remove_circle_outline</i></button>
+                        <button class="btn btn-quantity"><span id="quantity">&nbsp; 0</span></button>
+                        <button class="btn btn-quantity"><i class="material-icons">add_circle_outline</i></button>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+EOT;
         }
-    }
-    //TODO:Build the cart with cookies
-    public function addToCart(){
-
-    }
-    //TODO: display the cart
-    public function showCart(){
-
-    }
-    //TODO: place in orders table and use trigger to update into table
-    public function placeOrder(){
-
-    }
-    //TODO: allow for customer to view currently placed order
-    public function viewOrder(){
-
-    }
-    //TODO: using cookies generate a bill and allow for payment online
-    //TODO: use an SQL procedure somewhere
-    public function generateBill(){
-
+        echo $html;
     }
 }
