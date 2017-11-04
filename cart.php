@@ -83,7 +83,7 @@ EOT;
             $total += $value[3];
         }
         $html .= "<tr><th>Total:{$total}</th></tr></tbody></table>";
-        $html .= "<button class='btn btn-danger'>Place Order</button>";
+        $html .= "<button class='btn btn-danger' id='place-order'>Place Order</button>";
         echo $html;
     }
 }
