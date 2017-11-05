@@ -105,6 +105,8 @@ $menu = new menu($mysqli);
 <div class="modal fade" role="dialog" id="cartModal">
     <div class="modal-body" style="background: white">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <br>
+        <div class="alert alert-info">
         <?php
         if(isset($_SESSION['tableno'])) {
             echo "<h4>Table: " . $_SESSION['tableno'] . "</h4>";
@@ -113,16 +115,23 @@ $menu = new menu($mysqli);
         else
             echo "You have booked your table yet";
         ?>
+        </div>
+        <div class="alert alert-success">
+            <strong>Success!</strong> Order placed successfully.
+        </div>
+        <div class="alert alert-danger">
+            <strong>Failed.</strong><message></message>Order has failed. Please try again.
+        </div>
         <ul class="nav nav-tabs">
             <li><a data-toggle="tab" href="#curCart">Cart</a></li>
-            <li><a data-toggle="tab" href="#prevOrders">Previous Orders</a></li>
+            <li><a data-toggle="tab" href="#prevOrders" id="prevOrd">Previous Orders</a></li>
         </ul>
         <div class="tab-content">
             <div id="curCart" class="tab-pane fade">
 
             </div>
             <div id="prevOrders" class="tab-pane fade">
-                <h1>Hi</h1>
+
             </div>
         </div>
     </div>

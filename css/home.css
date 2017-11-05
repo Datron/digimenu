@@ -63,6 +63,12 @@ th :focus {
     background: #C62828;
     border:transparent;
 }
+.alert-success {
+    display: none ;
+}
+.alert-danger {
+    display: none;
+}
 .input-group-addon .material-icons {
     font-size: 17px;
     background: #C62828;
@@ -99,4 +105,8 @@ th :focus {
 }
 .btn-quantity {
     background: transparent;
+}
+.btn-done {
+    color: white;
+    background: red;
 }

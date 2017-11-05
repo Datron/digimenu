@@ -36,6 +36,34 @@ $(document).ready(function () {
        document.body.scrollTop = 0; // For Chrome, Safari and Opera
        document.documentElement.scrollTop = 0; // For IE and Firefox
    });
+   $('#curCart').on('click', '#place-order', function () {
+       var pref = $('#pref').val();
+       $.ajax({
+          method: 'POST',
+          url: 'cart.php',
+           data: {'place_ord':1,'pref':pref}
+       }).done(function (data) {
+           console.log("order placed");
+            var type = parseInt(data.split(" ")[0]);
+            if(type == 0){
+                $('message').text(data);
+                $('.alert-danger').css("display","block");
+            }
+            else{
+                $('.alert-success').css("display","block");
+            }
+       });
+   });
+   $('#prevOrd').click(function () {
+      $.ajax({
+          method: 'POST',
+          url: 'cart.php',
+          data: {'viewOrd':1}
+      }).done(function (data) {
+         $('#prevOrders').html(data);
+         console.log("previous orders done");
+      });
+   });
    $('.btn-quantity').on('click', function () {
       var sel = $(this).text().split('_')[0];
       var showQuan = $(this).parent().find("span");

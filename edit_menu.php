@@ -1,5 +1,6 @@
 <?php
     include 'dbconfig.php';
+    session_start();
 if (isset($_POST['dishName'])){
     $name = $_POST['dishName'];
     $des = $_POST['dishDes'];
@@ -12,10 +13,153 @@ if (isset($_POST['dishName'])){
         echo $mysqli->error;
     move_uploaded_file($_FILES["foodimg"]["tmp_name"], $target_file1);
 }
+if(isset($_POST['load'])) {
+    printOrders();
+    exit();
+}
+if (isset($_POST['ordcomp'])){
+    orderComplete($_POST['ordcomp']);
+    exit();
+}
+if (isset($_POST['comp_ord'])){
+    for($i=1;$i<=12;$i++) {
+        echo "<div class='row carView'>";
+        getCompletedOrders($i);
+        echo "</div>";
+    }
+    exit();
+}
 if (isset($_POST['staffName'])){
     $sql = "INSERT INTO staff(staff_name, role, phone) VALUES('{$_POST['staffName']}','{$_POST['staffRole']}','{$_POST['staffPhone']}')";
     if (!($mysqli->query($sql)))
         echo $mysqli->error;
+}
+function orderComplete($ord_id){
+    global $mysqli;
+    $sql = "UPDATE orders SET status=2 WHERE order_no=$ord_id";
+    if ($mysqli->query($sql))
+        echo "Order with order id ".$ord_id." is done";
+    else
+        echo $mysqli->error;
+}
+function printOrders(){
+    for($i=1;$i<=12;$i++) {
+        if ($i % 2 == 0)
+            echo "<div class='row cardView'>";
+        getCurrentOrders($i);
+        echo "</div>";
+    }
+}
+function getCurrentOrders($i){
+    global $mysqli;
+    $html = "";
+    $ord_id = 0;
+    $sql = "SELECT * FROM orders WHERE table_no={$i} AND status=1";
+    $result = $mysqli->query($sql);
+    if ($result->num_rows != 0) {
+        $html .= <<<EOT
+                <div class="col-md-1"></div>
+                <div class="col-md-5 card">
+<div class="row table-no">
+                <h1 class="table-no-print">{$i}</h1>
+                </div>
+EOT;
+        $html .= <<<EOT
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>status</th>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+EOT;
+        while ($row = $result->fetch_assoc()) {
+            $q = "SELECT Name FROM menu WHERE item_id={$row['item_id']}";
+            $r = $mysqli->query($q);
+            $name = $r->fetch_array()[0];
+            $ord_id = $row['order_no'];
+            $html .= <<<EOT
+            <tr>
+            <th><div class="checkbox">
+<label><input type="checkbox" value="{$row['order_no']}"></label>
+</div></th>
+            <th>{$name}</th>
+            <th>{$row['quantity']}</th>
+            </tr>                        
+EOT;
+        }
+        $html .= <<<EOT
+                    </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-done" value="$ord_id" id="ord-complete">Order Completed</button>
+            </div>
+EOT;
+    }
+    else {
+        echo "<h1>No orders yet</h1>";
+        exit();
+    }
+    $html .= "</div>";
+    echo $html;
+}
+function getCompletedOrders($i){
+    global $mysqli;
+    $html = "";
+    $mes ="";
+    $sql = "SELECT * FROM orders WHERE table_no=$i";
+    $result = $mysqli->query($sql);
+    if ($result->num_rows != 0) {
+        $html .= <<<EOT
+        <div class="col-md-1"></div>
+                <div class="col-md-7 card">
+<div class="row table-no">
+                <h1 class="table-no-print">{$i}</h1>
+                </div>
+EOT;
+        $html .= <<<EOT
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+EOT;
+        while ($row = $result->fetch_assoc()) {
+            $q = "SELECT Name FROM menu WHERE item_id={$row['item_id']}";
+            $r = $mysqli->query($q);
+            $name = $r->fetch_array()[0];
+            $html .= <<<EOT
+                    <tr>
+                    <th>{$name}</th>
+                    <th>{$row['quantity']}</th>
+                    </tr>                        
+EOT;
+            $status = $row['status'];
+        }
+        if ($status == 2)
+            $mes = "Order done but bill not paid";
+        elseif ($status == 3)
+            $mes = "Order done and bill paid";
+        elseif ($status == 4)
+            $mes = "Order not prepared";
+        $html .= <<<EOT
+                    </tbody>
+                    </table>
+                </div>
+                <div class="alert alert-info">status: {$mes}</div>
+            </div>
+</div>
+EOT;
+    }
+    $html .= "</div>";
+    echo $html;
 }
 ?>
 <!DOCTYPE html>
@@ -78,6 +222,13 @@ if (isset($_POST['staffName'])){
             <div class="col-md-3"></div>
             <!--Main body where orders or modifiers are displayed-->
             <div class="col-md-8">
+                <!--ORDERS-->
+                <div class="dbHandler orders">
+
+                </div>
+                <div class="dbHandler complete-order">
+
+                </div>
                 <!-- insert -->
                 <!--TODO: add orders and complete orders-->
                 <div class="dbHandler inserting">
