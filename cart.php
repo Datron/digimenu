@@ -102,13 +102,20 @@ EOT;
 function assignWaiter(){
     global $mysqli;
     if ($res = $mysqli->query("CALL allocateWaiter()")){
-        $row = $res->fetch_array();
+        $row = $res->fetch_all();
         $n = $res->num_rows;
-        if ($n != 0)
-            return $row[rand(0,$n)];
+        if ($n != 0) {
+            $i = rand(0,3);
+            echo $i;
+            mysqli_free_result($res);
+            mysqli_next_result($mysqli);
+            return $row[$i][0];
+        }
         else
             return 3;
     }
+    else
+        $mysqli->error;
 }
 function placeOrder($ord_id,$pref){
     global $mysqli,$cart;
@@ -116,11 +123,14 @@ function placeOrder($ord_id,$pref){
         echo "0 You cannot place an order until you book a table";
         return;
     }
-    $waiter =(int)assignWaiter();
+    $waiter = (int)assignWaiter();
     foreach ($cart as $key=>$value){
         $sql = "INSERT INTO orders VALUES($ord_id,$key,$waiter,{$_SESSION['tableno']},1,'$pref',$value[2],$value[3])";
-        if ($mysqli->query($sql))
+        if ($mysqli->query($sql)) {
             echo "1";
+            unset($_SESSION['cart']);
+            unset($cart);
+        }
         else
             echo $mysqli->error;
     }
@@ -134,16 +144,16 @@ function viewOrder(){
         $total = 0;
         $sql = "SELECT * FROM orders WHERE table_no={$_SESSION['tableno']} AND order_no={$row['order_no']}";
         $res = $mysqli->query($sql);
-
+        $href = "collapse".$row['order_no'];
         $html .= <<<EOT
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
 <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">{$row['order_no']}</a>
+        <a data-toggle="collapse" data-parent="#accordion" href="#{$href}">{$row['order_no']}</a>
       </h4>
     </div>
-    <div id="collapse1" class="panel-collapse collapse">
+    <div id="{$href}" class="panel-collapse collapse">
       <div class="panel-body">
 <table class="table">
             <thead>

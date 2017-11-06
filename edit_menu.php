@@ -56,6 +56,7 @@ function getCurrentOrders($i){
     $ord_id = 0;
     $sql = "SELECT * FROM orders WHERE table_no={$i} AND status=1";
     $result = $mysqli->query($sql);
+//    var_dump($result->fetch_all());
     if ($result->num_rows != 0) {
         $html .= <<<EOT
                 <div class="col-md-1"></div>
@@ -100,8 +101,7 @@ EOT;
 EOT;
     }
     else {
-        echo "<h1>No orders yet</h1>";
-        exit();
+        return;
     }
     $html .= "</div>";
     echo $html;
