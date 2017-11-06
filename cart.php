@@ -99,22 +99,32 @@ EOT;
         echo $html;
     }
 }
-//TODO: place in orders table and use trigger to update into table
+function assignWaiter(){
+    global $mysqli;
+    if ($res = $mysqli->query("CALL allocateWaiter()")){
+        $row = $res->fetch_array();
+        $n = $res->num_rows;
+        if ($n != 0)
+            return $row[rand(0,$n)];
+        else
+            return 3;
+    }
+}
 function placeOrder($ord_id,$pref){
     global $mysqli,$cart;
     if(!isset($_SESSION['tableno'])) {
         echo "0 You cannot place an order until you book a table";
         return;
     }
+    $waiter =(int)assignWaiter();
     foreach ($cart as $key=>$value){
-        $sql = "INSERT INTO orders VALUES($ord_id,$key,3,{$_SESSION['tableno']},1,'$pref',$value[2],$value[3])";
+        $sql = "INSERT INTO orders VALUES($ord_id,$key,$waiter,{$_SESSION['tableno']},1,'$pref',$value[2],$value[3])";
         if ($mysqli->query($sql))
             echo "1";
         else
             echo $mysqli->error;
     }
 }
-//TODO: allow for customer to view currently placed order
 function viewOrder(){
     global $mysqli;
     $q = "SELECT order_no FROM orders WHERE table_no={$_SESSION['tableno']} GROUP BY order_no";
@@ -170,4 +180,3 @@ EOT;
     $html .= "</div><br><a href='billing.php'><button class='btn btn-done'>Pay and leave</button></a>";
     echo $html;
 }
-//TODO: use an SQL procedure somewhere

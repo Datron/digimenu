@@ -230,7 +230,6 @@ EOT;
 
                 </div>
                 <!-- insert -->
-                <!--TODO: add orders and complete orders-->
                 <div class="dbHandler inserting">
                     <form class="form-horizontal" method="post" enctype=multipart/form-data>
                         <legend>Insert</legend>

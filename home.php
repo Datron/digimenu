@@ -64,6 +64,10 @@ $menu = new menu($mysqli);
     </nav>
     <!--------------------------------END OF NAVBAR ---------------------------------------->
 </div>
+<div class="container-fluid tabs" id="searchLoc">
+    <div class="row cardView" id="searchTarget">
+    </div>
+</div>
 <div class="container-fluid tabs" id="all">
     <div class="row cardView">
         <?php

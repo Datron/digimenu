@@ -54,6 +54,19 @@ $(document).ready(function () {
             }
        });
    });
+   $('#search').keyup(function () {
+       var key = $('#search').val();
+       $.ajax({
+           method: 'POST',
+           url: 'prediction.php',
+           data: {'key':key}
+       }).done(function (data) {
+           $('.tabs').css('display','none');
+           $('#searchTarget').html(data);
+           $('#searchLoc').css('display','block');
+           console.log("search done");
+       });
+   })
    $('#prevOrd').click(function () {
       $.ajax({
           method: 'POST',
