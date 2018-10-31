@@ -8,6 +8,12 @@
 session_start();
 include "dbconfig.php";
 $table = $_SESSION['tableno'];
+if (isset($_POST['feed']))
+{
+    $feedback = $_POST['text'];
+    $q1 = "INSERT INTO feedback VALUES($feedback)";
+    $mysqli->query($q1);
+}
 $q = "UPDATE tables SET name=NULL,order_no=NULL,preferences=NULL,waiter_name=NULL WHERE table_no=$table";
 $q1 = "DELETE FROM orders WHERE table_no=$table";
 if ($mysqli->query($q)){
@@ -64,6 +70,17 @@ if ($mysqli->query($q)){
                     $('.names').click(function () {
                         $(this).css('border', '2px solid #f44336');
                     });
+                    $('.btn .btn-done').click(function () {
+                       var feedback = $('textarea').text();
+                       $.ajax({
+                          method: 'POST',
+                          url: 'billing.php',
+                          data: {'feed':1,'text':feedback}
+                       }).done(function () {
+                           $('textarea').remove();
+                           console.log("Thank you for the feedback");
+                       })
+                    });
                     $('li').click(function () {
                         var table = $(this).val();
                         $('.dropdown .btn').html(table + " " + "<span class='caret'></span>");
@@ -77,6 +94,11 @@ if ($mysqli->query($q)){
         <div class="container-fluid">
             <div class="row">
                 <h1 class="thank"> Your payment has been processed. Thank you and please visit again. </h1>
+            </div>
+            <div class="row">
+                <textarea class="form-control" rows="3" placeholder="Your feedback..">
+                </textarea>
+                <button type="button" class="btn btn-done">Submit</button>
             </div>
         </div>
         </body>
