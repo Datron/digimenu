@@ -61,7 +61,8 @@ EOT;
             else
                 $sym = "images/non-veg-symbol.png";
             $html .= <<<EOT
-            <div class="col-md-6 col-xs-12 card">
+            <div class="col-md-2"></div>
+            <div class="col-md-4 col-xs-12 card">
                 <div class="row">
                 <img src="{$row['img_src']}" class="img-responsive menu-img"/>
                 </div>
@@ -97,7 +98,8 @@ EOT;
             else
                 $sym = "images/non-veg-symbol.png";
             $html .= <<<EOT
-            <div class="col-md-6 col-xs-12 card">
+            <div class="col-md-2"></div>
+            <div class="col-md-4 col-xs-12 card">
                 <div class="row">
                 <img src="{$row['img_src']}" class="img-responsive menu-img"/>
                 </div>
@@ -133,7 +135,8 @@ EOT;
             else
                 $sym = "images/non-veg-symbol.png";
             $html .= <<<EOT
-            <div class="col-md-6 col-xs-12 card">
+            <div class="col-md-2"></div>
+            <div class="col-md-4 col-xs-12 card">
                 <div class="row">
                 <img src="{$row['img_src']}" class="img-responsive menu-img"/>
                 </div>
@@ -170,7 +173,8 @@ EOT;
             else
                 $sym = "images/non-veg-symbol.png";
             $html .= <<<EOT
-            <div class="col-md-6 col-xs-12 card">
+            <div class="col-md-2"></div>
+            <div class="col-md-4 col-xs-12 card">
                 <div class="row">
                 <img src="{$row['img_src']}" class="img-responsive menu-img"/>
                 </div>

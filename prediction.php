@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: karti
- * Date: 06-Nov-17
- * Time: 8:57 PM
- */
 include "dbconfig.php";
 if (isset($_POST['key'])){
     $key = $_POST['key'];

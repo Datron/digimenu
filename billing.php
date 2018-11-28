@@ -26,18 +26,16 @@ if ($mysqli->query($q)){
             <meta charset="utf-8">
             <meta lang="en">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+            <script src="./js/lib/jquery.min.js"></script>
             <link href="https://fonts.googleapis.com/css?family=Chela+One|Fira+Sans|Lato|Roboto|Ubuntu|Pacifico" rel="stylesheet">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <!-- Latest compiled and minified CSS -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-            <!-- Optional theme -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+            <link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+                    <!-- Optional theme -->
+            <link rel="stylesheet" href="./css/lib/bootstrap-theme.min.css">
 
             <!-- Latest compiled and minified JavaScript -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-            <!-- JQuery script -->
+            <script src="./js/lib/bootstrap.min.js"></script>
             <style>
                 body {
                     background: #1D120C;
@@ -52,6 +50,9 @@ if ($mysqli->query($q)){
                     position: absolute;
                     z-index: -1;
                     top: 0px;
+                }
+                textarea {
+                    color: black;
                 }
                 select {
                     background: red!important;
@@ -95,10 +96,15 @@ if ($mysqli->query($q)){
             <div class="row">
                 <h1 class="thank"> Your payment has been processed. Thank you and please visit again. </h1>
             </div>
+            <br>
             <div class="row">
-                <textarea class="form-control" rows="3" placeholder="Your feedback..">
+                <div class="col-md-3"></div>
+                <div class="col-md-5" style="margin-left:50px">
+                    <textarea class="form-control" rows="3" placeholder="Your feedback..">
                 </textarea>
+                    <br>
                 <button type="button" class="btn btn-done">Submit</button>
+                </div>
             </div>
         </div>
         </body>
